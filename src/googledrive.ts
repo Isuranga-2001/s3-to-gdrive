@@ -1,9 +1,10 @@
 import { google, drive_v3 } from 'googleapis';
+import { Readable } from 'stream';
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: '../service-account-key.json',
+  keyFile: 'service-account-key.json', // Adjust the path if necessary
   scopes: SCOPES,
 });
 
@@ -23,6 +24,13 @@ export const createFolder = async (folderName: string): Promise<string> => {
   return res.data.id!;
 };
 
+const bufferToStream = (buffer: Buffer): Readable => {
+  const stream = new Readable();
+  stream.push(buffer);
+  stream.push(null);
+  return stream;
+};
+
 export const uploadFileToDrive = async (folderId: string, fileName: string, fileContent: Buffer): Promise<void> => {
   const fileMetadata: drive_v3.Schema$File = {
     name: fileName,
@@ -31,7 +39,7 @@ export const uploadFileToDrive = async (folderId: string, fileName: string, file
 
   const media = {
     mimeType: 'application/octet-stream',
-    body: fileContent,
+    body: bufferToStream(fileContent),
   };
 
   await drive.files.create({
