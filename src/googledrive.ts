@@ -3,7 +3,7 @@ import { google, drive_v3 } from 'googleapis';
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: 'path/to/your/service-account-key.json',
+  keyFile: '../service-account-key.json',
   scopes: SCOPES,
 });
 
