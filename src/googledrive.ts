@@ -48,3 +48,14 @@ export const uploadFileToDrive = async (folderId: string, fileName: string, file
     fields: 'id',
   });
 };
+
+export const shareFolder = async (folderId: string, emailAddress: string): Promise<void> => {
+	await drive.permissions.create({
+		fileId: folderId,
+		requestBody: {
+			role: 'writer', // Adjust the role as necessary (writer, reader, commenter)
+			type: 'user',
+			emailAddress: emailAddress,
+		},
+	});
+};
