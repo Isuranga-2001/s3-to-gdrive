@@ -36,6 +36,7 @@ export const getS3File = async (fileName: string): Promise<Buffer> => {
 export const listS3Files = async (): Promise<any[]> => {
   const command = new ListObjectsV2Command({
     Bucket: process.env.S3_BUCKET_NAME,
+    Prefix: "TestCompany01/", // Specifies the folder name
   });
 
   const data = await s3.send(command);
