@@ -26,7 +26,7 @@ Before running this project, ensure you have the following:
 ## Setup
 1.  **Clone the repository:**
 	```
-	git clone https://github.com/yourusername/s3-to-google-drive.git
+	git clone https://github.com/Isuranga-2001/s3-to-gdrive.git
 	cd s3-to-google-drive
 	```
 	
